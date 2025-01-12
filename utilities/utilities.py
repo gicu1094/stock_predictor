@@ -66,3 +66,13 @@ def write_output_csv(stock_list):
         print(f"Error on writing in file {output_csv_file}: {e}")
         return False
     return True
+
+def clean_up_output_data_folder(folder_path):
+    if os.path.exists(folder_path) and os.path.isdir(folder_path):
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            except Exception as e:
+                print(f"Error deleting {file_path}: {e}")

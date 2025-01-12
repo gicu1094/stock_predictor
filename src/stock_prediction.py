@@ -67,7 +67,6 @@ class StockPrediction:
         #get the random timestamp from file
         try:
             random_timestamp_idx = random.randint(0, len(file_data)-10)
-            print(random_timestamp_idx)
             return file_data[random_timestamp_idx:random_timestamp_idx+10]
         except Exception as e:
              print(f"Error extracting rows: {e}")
@@ -152,7 +151,7 @@ class StockPrediction:
         except Exception as e:
             print(f"Error occureed while predictin n+3 price: {e}")
         
-        print(stock_list)
+        #print(stock_list)
         util.write_output_csv(stock_list)
 
 
