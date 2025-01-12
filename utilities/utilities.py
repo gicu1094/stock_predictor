@@ -3,13 +3,17 @@ import csv
 from datetime import datetime, timedelta
 
 def get_next_day(date):
-        try:
-            date_object = datetime.strptime(date, '%d-%m-%Y')
-            next_day = date_object + timedelta(days=1)
-            return next_day.strftime('%d-%m-%Y')
-        except Exception as e:
-            print(f"Invalid date format! : {e}")
-            return None
+    '''
+    Return the next valid date.
+    
+    '''
+    try:
+        date_object = datetime.strptime(date, '%d-%m-%Y')
+        next_day = date_object + timedelta(days=1)
+        return next_day.strftime('%d-%m-%Y')
+    except Exception as e:
+        print(f"Invalid date format! : {e}")
+        return None
 
 
 def get_second_max_price(list_rows):
@@ -25,7 +29,7 @@ def get_second_max_price(list_rows):
         
     if second_max == float('-inf'):
         raise ValueError("Not enough distinct prices!")
-    
+
     return second_max
     
     
@@ -33,7 +37,7 @@ def get_second_max_price(list_rows):
 def write_output_csv(stock_list):
     if not stock_list:
         print("Error: Nothing to write!")
-        return
+        return False
     
     try:
         output_folder = "output_data\\"
@@ -42,9 +46,16 @@ def write_output_csv(stock_list):
         output_csv_file = os.path.join(output_folder, f"{stock_id}_out.csv")
     except Exception as e:
         print(f"Unexpected error occured while creatin the output path: {e}")
+        return False
 
-    for row in stock_list:
-        row['price'] = "{:.2f}".format(row['price'])
+    #this is done to have all the prices with 2 decimals
+    #Example: 999.90 not 999.9
+    try:
+        for row in stock_list:
+            row['price'] = "{:.2f}".format(row['price'])
+    except Exception as e:
+        print(f"Error while formating the price!")
+        return False
 
     try:
         with open(output_csv_file, mode = 'w', newline='') as file:
@@ -52,3 +63,5 @@ def write_output_csv(stock_list):
             writer.writerows(stock_list)
     except Exception as e:
         print(f"Error on writing in file {output_csv_file}: {e}")
+        return False
+    return True

@@ -10,9 +10,8 @@ def main():
         return
 
     for file_name in stocks_to_process:
-        data_colection = stock_predictor.get_10_consecutive_data_points_from_file(file_name)
-        #print(data_colection)
-        stock_predictor.predict_next_3_values_for_stock(data_colection)
+        list_of_data_points = stock_predictor.get_10_consecutive_data_points_from_file(file_name)
+        stock_predictor.predict_next_3_values_for_stock(list_of_data_points)
 
 if __name__ == "__main__":
     main()
