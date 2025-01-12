@@ -26,13 +26,14 @@ Stock-ID,Timestamp(dd-mm-yyyy),stock_price_value
 # Output format:
 One .csv output file for each file processed. Each .csv file should have 3 columns on each row as shown below.
 Timestamp & stock price have same format as in input file.
-
+```bash
 Stock-ID,Timestamp-1,stock price 1
-..
+...
 Stock-ID,Timestamp-n,stock price n
 Stock-ID,Timestamp-n+1,stock price n+1
 Stock-ID,Timestamp-n+2,stock price n+2
 Stock-ID,Timestamp-n+3,stock price n+3
+```
 
 # Instalation:
 1. Clone repository and go to project folder:
