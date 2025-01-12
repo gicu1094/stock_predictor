@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 def get_next_day(date):
     '''
     Return the next valid date.
-    
+
     '''
     try:
         date_object = datetime.strptime(date, '%d-%m-%Y')
@@ -26,9 +26,10 @@ def get_second_max_price(list_rows):
             first_max = price
         elif first_max > price > second_max:
             second_max = price
-        
+    
+    #in case all the prices are the same just return the value of price
     if second_max == float('-inf'):
-        raise ValueError("Not enough distinct prices!")
+        second_max = first_max
 
     return second_max
     
