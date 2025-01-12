@@ -1,9 +1,19 @@
 from src.stock_prediction import StockPrediction
 
 def main():
-    parent_folder = "input_data"
-
-    stock_predictor  = StockPrediction(parent_folder)
+    
+    while True:
+        try:
+            recomended_number_of_files = int(input("Enter the number of files to be processed from each stock: "))
+            print(f"You entered {recomended_number_of_files}")
+            if recomended_number_of_files in (1,2):
+                break
+            else:
+                print(f"Invalid input. The input can be only 1 or 2")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+     
+    stock_predictor  = StockPrediction(recomended_number_of_files)
     if stock_predictor.initialize():
         stocks_to_process = stock_predictor.get_stocks_to_be_processed()
     else:

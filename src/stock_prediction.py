@@ -6,17 +6,18 @@ import utilities.utilities as util
 
 class StockPrediction:
     
-    def __init__(self, parent_directory):
-            self.__parent_directory = parent_directory
+    def __init__(self, recomended_number_of_files):
+            self.__number_of_files_for_each_stock = recomended_number_of_files
             self.__stocks_to_be_processed = []
         
     def initialize(self):
         """
         Initialize StockPrediction object.
         """
+        parent_directory = "input_data"
         try:
-            stocks_list = self.__get_list_of_stocks_folders(self.__parent_directory)
-            self.__stocks_to_be_processed = self.__get_stocks_list_to_be_processed(stocks_list, 2)
+            stocks_list = self.__get_list_of_stocks_folders(parent_directory)
+            self.__stocks_to_be_processed = self.__get_stocks_list_to_be_processed(stocks_list, self.__number_of_files_for_each_stock)
             return True
         except Exception as e:
             print(f"Object initializing error occured: {e}")
