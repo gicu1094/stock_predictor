@@ -3,19 +3,11 @@ import unittest
 from src.stock_prediction import StockPrediction
 
 class TestStockPrediction(unittest.TestCase):
-    def test_obj_initialization(self):
-        folder_path1 = "input_data"
-        obj = StockPrediction(folder_path1)
-        self.assertEqual(obj.initialize(), True)
 
-        folder_path2 = "wrong_path"
-        obj2 = StockPrediction(folder_path2)
-        self.assertEqual(obj2.initialize(), False)
-    
     def test_get_10_consecutive_data_points_from_file(self):
 
         #test basic case
-        obj = StockPrediction("tests\\input_files_for_testing")
+        obj = StockPrediction(2)
         list1 = obj.get_10_consecutive_data_points_from_file("tests\\input_files_for_testing\\test1.csv")
         self.assertEqual(len(list1), 10)
 

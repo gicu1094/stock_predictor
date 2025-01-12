@@ -6,17 +6,18 @@ import utilities.utilities as util
 
 class StockPrediction:
     
-    def __init__(self, parent_directory):
-            self.__parent_directory = parent_directory
+    def __init__(self, recomended_number_of_files):
+            self.__number_of_files_for_each_stock = recomended_number_of_files
             self.__stocks_to_be_processed = []
         
     def initialize(self):
         """
         Initialize StockPrediction object.
         """
+        parent_directory = "input_data"
         try:
-            stocks_list = self.__get_list_of_stocks_folders(self.__parent_directory)
-            self.__stocks_to_be_processed = self.__get_stocks_list_to_be_processed(stocks_list, 2)
+            stocks_list = self.__get_list_of_stocks_folders(parent_directory)
+            self.__stocks_to_be_processed = self.__get_stocks_list_to_be_processed(stocks_list, self.__number_of_files_for_each_stock)
             return True
         except Exception as e:
             print(f"Object initializing error occured: {e}")
@@ -66,7 +67,6 @@ class StockPrediction:
         #get the random timestamp from file
         try:
             random_timestamp_idx = random.randint(0, len(file_data)-10)
-            print(random_timestamp_idx)
             return file_data[random_timestamp_idx:random_timestamp_idx+10]
         except Exception as e:
              print(f"Error extracting rows: {e}")
@@ -151,7 +151,7 @@ class StockPrediction:
         except Exception as e:
             print(f"Error occureed while predictin n+3 price: {e}")
         
-        print(stock_list)
+        #print(stock_list)
         util.write_output_csv(stock_list)
 
 

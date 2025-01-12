@@ -54,6 +54,17 @@ class TestUtilities(unittest.TestCase):
         second_max3 = util.get_second_max_price(list3)
         self.assertEqual(second_max3, 17152.05)
 
+        #test the case where there are multiple second_max values
+        list4 = [{'stock-id': 'FLTR', 'timestamp': '29-10-2023', 'price': 17152.05},
+                 {'stock-id': 'FLTR', 'timestamp': '30-10-2023', 'price': 17152.05},
+                 {'stock-id': 'FLTR', 'timestamp': '31-10-2023', 'price': 17152.05},
+                 {'stock-id': 'FLTR', 'timestamp': '01-11-2023', 'price': 17152.05},
+                 {'stock-id': 'FLTR', 'timestamp': '02-11-2023', 'price': 17152.05},
+                 {'stock-id': 'FLTR', 'timestamp': '03-11-2023', 'price': 17152.05}]
+
+        second_max4 = util.get_second_max_price(list4)
+        self.assertEqual(second_max4, 17152.05)
+
     def test_write_csv_file(self):
         list1 = []
         is_file_written_correctly = util.write_output_csv(list1)

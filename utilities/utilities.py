@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 def get_next_day(date):
     '''
     Return the next valid date.
-    
+
     '''
     try:
         date_object = datetime.strptime(date, '%d-%m-%Y')
@@ -26,9 +26,10 @@ def get_second_max_price(list_rows):
             first_max = price
         elif first_max > price > second_max:
             second_max = price
-        
+    
+    #in case all the prices are the same just return the value of price
     if second_max == float('-inf'):
-        raise ValueError("Not enough distinct prices!")
+        second_max = first_max
 
     return second_max
     
@@ -65,3 +66,13 @@ def write_output_csv(stock_list):
         print(f"Error on writing in file {output_csv_file}: {e}")
         return False
     return True
+
+def clean_up_output_data_folder(folder_path):
+    if os.path.exists(folder_path) and os.path.isdir(folder_path):
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            except Exception as e:
+                print(f"Error deleting {file_path}: {e}")
